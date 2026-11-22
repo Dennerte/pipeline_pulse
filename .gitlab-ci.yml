@@ -1,0 +1,7 @@
+stages:
+  - run
+
+build-job:
+  stage: run
+  script:
+    - python healthcheck.py 127.0.0.1:8000
