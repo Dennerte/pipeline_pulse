@@ -4,7 +4,10 @@ from time import sleep
 
 def health_checker(formatted_url):
     for attempt in range(4):
-        exit_code = os.system(f'curl.exe --fail -i "{formatted_url}"')
+        curl_command = "curl.exe" if os.name == "nt" else "curl"
+        exit_code = os.system(
+            f'{curl_command} --fail -i "{formatted_url}"'
+        )
 
         if exit_code == 0:
             sys.exit(0)

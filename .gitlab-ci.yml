@@ -1,7 +1,10 @@
+image: python:3.12
+
 stages:
   - run
 
-build-job:
+healthcheck-job:
   stage: run
   script:
-    - python healthcheck.py 127.0.0.1:8000
+    - python -m http.server 8000 --bind 127.0.0.1 > server.log 2>&1 &
+    - python healthcheck.py http://127.0.0.1:8000
